@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename = 'favicon.ico') }}">
+    <title>Add student</title>
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        hr {
+            width: 10%;
+        }
+
+        label {
+            font-family: 'Raleway', sans-serif;
+            width: 25%;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        input {
+            font-family: 'Raleway', sans-serif;
+            width: 25%;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .btn_submit {
+            width: 200px;
+            margin-top: 30px;
+            background: aquamarine;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Register a Student</h1>
+    <form action="{{ url_for('insert') }}" method="POST">
+        <label for="s_name">Name:</label>
+        <input type="text" id="s_name" name="s_name" placeholder="Enter name.." required>
+
+        <label for="s_address">Address:</label>
+        <input type="text" id="s_address" name="s_address" placeholder="Enter Address.." required>
+
+        <label for="s_phone">Phone:</label>
+        <input type="number" id="s_phone" name="s_phone" placeholder="Enter phone number..">
+
+        <label for="s_email">Email:</label>
+        <input type="email" id="s_email" name="s_email" placeholder="Enter email.." required>
+        <label for="s_age">Age:</label>
+        <input type="number" id="s_age" name="s_age" placeholder="Enter age.." required>
+        <input class="btn_submit" type="submit" value="Add student">
+    </form>
+</body>
+
+</html>

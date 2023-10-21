@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename = 'favicon.ico') }}">
+    <title>Update Student Information</title>
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        hr {
+            width: 10%;
+        }
+
+        label {
+            font-family: 'Raleway', sans-serif;
+            width: 25%;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        input {
+            font-family: 'Raleway', sans-serif;
+            width: 25%;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .btn_submit {
+            font-family: 'Raleway', sans-serif;
+            width: 200px;
+            margin-top: 30px;
+            background: darkgoldenrod;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Update Student Information</h1>
+    <form action="{{ url_for('update', s_id=row[0]) }}" method="POST">
+        <input type="hidden" name="student_id" value="{{ row.0 }}">
+        <label for="s_name">Name:</label>
+        <input type="text" id="s_name" name="s_name" value="{{ row.1 }}" placeholder="Enter name..">
+
+        <label for="s_address">Address:</label>
+        <input type="text" id="s_address" name="s_address" value="{{ row.2 }}" placeholder="Enter Address..">
+
+        <label for="s_phone">Phone:</label>
+        <input type="number" id="s_phone" name="s_phone" value="{{ row.3 }}" placeholder="Enter phone number..">
+
+        <label for="s_email">Email:</label>
+        <input type="email" id="s_email" name="s_email" value="{{ row.4 }}" placeholder="Enter email..">
+        <label for="s_age">Age:</label>
+        <input type="number" id="s_age" name="s_age" value="{{ row.5 }}" placeholder="Enter age..">
+        <input class="btn_submit" type="submit" value="Update info">
+    </form>
+</body>
+
+</html>

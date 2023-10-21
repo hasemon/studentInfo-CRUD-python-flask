@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename = 'favicon.ico') }}">
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        nav {
+            text-align: center;
+        }
+        button {
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: 'Raleway', sans-serif;
+            margin: 20px;
+            color: black;
+        }
+
+        footer {
+            text-align: center;
+        }
+
+        table,
+        td {
+            border: 1px solid #333;
+        }
+
+        thead,
+        tfoot {
+            background-color: #333;
+            color: #fff;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border: 1px;
+        }
+        table td, th {
+            padding: 10px;
+            text-align: center;
+        }
+        hr {
+            width: 30%;
+        }
+        .btnAdd {
+            background: aquamarine;
+            cursor: pointer;
+        }
+        .btnUpdate {
+            color: darkcyan;
+        }
+        .btnDelete {
+            color: darkred;
+        }
+        .alert {
+            text-align: center;
+            width: 30%;
+            display: block;
+            margin: 20px auto;
+            background: aquamarine;
+            color: darkgreen;
+            border-radius: 20px;
+            padding: 1px;
+        }
+    </style>
+</head>
+
+<body>
+{% block body %}
+    <h1 style="text-align: center;">Student Information</h1>
+    <nav>
+        <button type="button" class="btnAdd"><a href="addInfo.html">Add Student</a></button>
+
+    </nav>
+    {%  with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="7">Student's list</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for row in students %}
+
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td>{{ row.4 }}</td>
+                <td>{{ row.5 }}</td>
+                <td>
+                    <a
+                        href='/update/{{ row.0 }}'
+                        class="btnUpdate"
+                    >
+                        Update
+                    </a>
+
+                    <a
+                        href='/delete/{{ row.0 }}'
+                        class="btnDelete"
+                        onclick="return confirm('Deleting confirmation!')"
+                    >
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+    <hr>
+    <footer>
+        <p>Maintained by Spider-Man</p>
+    </footer>
+</body>
+
+<script type="text/javascript" src="{{ url_for('static', filename="js/jquery-3.7.1.min.js") }}"></script>
+<script>
+        setTimeout(function() {
+            let flashMessage = document.querySelector('.alert');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 3000);
+</script>
+
+</html>
