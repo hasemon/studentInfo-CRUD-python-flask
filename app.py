@@ -78,11 +78,11 @@ def add_info():
     return render_template('addInfo.html')
 
 
-@app.route('/delete/<string:id_data>', methods=['GET', 'POST'])
+@app.route('/delete/<int:id_data>', methods=['GET', 'POST'])
 def delete(id_data):
     flash('Data deleted successfully.')
     cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM students WHERE s_id = %s", id_data)
+    cur.execute("DELETE FROM students WHERE s_id = %s", (id_data,))
     mysql.connection.commit()
     return redirect(url_for('index'))
 
